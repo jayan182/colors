@@ -3,7 +3,7 @@ import {useState} from "react";
 import NavBar from '../Common/Nav/index';
 
 function Contacts() {
-    const [currentUser, ] = useState("Jayan");
+    const [currentUser, ] = useState("123123123123123");
     return (
       <div>
         <NavBar />
