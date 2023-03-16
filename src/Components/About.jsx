@@ -1,11 +1,10 @@
-import NavBar from '../Common/Nav/index';
+import Wrapper from '../Common/Wrapper/index';
 
 function About() {
     return (
-      <div>
-        <NavBar />
+      <Wrapper>
         <h1>This is the About page</h1>
-      </div>
+      </Wrapper>
     );
   }
   

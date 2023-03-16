@@ -2,10 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import Contacts from "./Components/Contacts";
-import Contact from "./Components/Contact";
-import NewContact from "./Components/NewContact";
-import Comments from "./Components/Comments";
-import ContactIndex from "./Components/ContactIndex";
+import List from "./Components/Contact/list";
+import Create from "./Components/Contact/create";
+import Detail from "./Components/Contact/detail";
 
 function App() {
   return (
@@ -14,12 +13,10 @@ function App() {
             <Route path="/" element={ <Home/> } />
             <Route path="*" element={ <About/> } />
             <Route path="about" element={ <About/> } />
+            <Route path=":productName/detail/" element={ <Detail/> } />
             <Route path="contacts" element={ <Contacts/> }>
-                <Route path='new' element={<NewContact />} /> 
-                <Route path=':postId' element={<Contact />}> 
-                    <Route index element={<ContactIndex />} />
-                    <Route path='comments' element={<Comments />} />
-                </Route>
+                <Route path="list" element={ <List/ >} />
+                <Route path="create" element={ <Create/ >} />
             </Route>
         </Routes>
     </div>

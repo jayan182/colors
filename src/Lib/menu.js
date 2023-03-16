@@ -22,25 +22,13 @@ const menus = [
             {
                 name: "List",
                 icon: <FontAwesomeIcon icon={faCheckSquare} />,
-                path: "/contact/list",
+                path: "/contacts/list",
                 subMenu: [] 
             },
             {
                 name: "Create",
                 icon: <FontAwesomeIcon icon={faCheckSquare} />,
-                path: "/contact/create",
-                subMenu: [] 
-            },
-            {
-                name: "Update",
-                icon: <FontAwesomeIcon icon={faCheckSquare} />,
-                path: "/contact/update",
-                subMenu: [] 
-            },
-            {
-                name: "Delete",
-                icon: <FontAwesomeIcon icon={faCheckSquare} />,
-                path: "/contact/delete",
+                path: "/contacts/create",
                 subMenu: [] 
             }
         ]
