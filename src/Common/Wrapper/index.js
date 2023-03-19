@@ -3,7 +3,6 @@ import Footer from '../Footer/index';
 import Index from '../BreadCrumb/index';
 
 function Wrapper({children}) {
-    console.log("children",children)
     return (
         <>
             <NavBar />
