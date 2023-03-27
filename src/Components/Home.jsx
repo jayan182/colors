@@ -3,17 +3,26 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import CardsList from '../Lib/cards';
-import {useState} from 'react';
-import Products from '../Lib/products';
+import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import Sort from '../Lib/sort';
+import UserContext  from '../Providers/userProvider';
 
 function Home() {
-  const [products, ] = useState(Products);
+  var product = useContext(UserContext);
+  const [counter, setCounter] = useState(0);
+  const [products, setProducts] = useState(product);
   const [hoveredCard, setHoveredCard] = useState('');
-  
+
+  useEffect(()=>{
+    let temp_products = Sort(products, "name");
+    setProducts(temp_products);
+  },[]);
+
   return (
     <>
       <Wrapper>
+      <button onClick={()=>{setCounter(counter + 1)}}>+</button>
         <Row className="gap-3 p-5" xs={1} md={2} lg={6}>
           {
             CardsList.map((card,key)=>{
@@ -58,7 +67,7 @@ function Home() {
               return (
                 <ol key={key}>
                   <Link to={`${product.name}/detail`}>{product.name}</Link>
-                  </ol>
+                </ol>
               )
             })
           }

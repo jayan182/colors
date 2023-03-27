@@ -13,17 +13,14 @@ import Products from '../../Lib/products';
 function Detail(){
     const [products,] = useState(Products);
     let params = useParams();
-    let productName = params.productName;
     const [filtreredProduct, setFilltredProduct] = useState([]);
 
     useEffect(()=>{
         let temp_product = products.filter((tmp)=>{
-            return tmp.name === productName;
+            return tmp.name === params.productName;
         });
         setFilltredProduct(temp_product);
     },[]);
-
-    console.log("filtreredProduct",filtreredProduct);
 
     return (
         <Wrapper>

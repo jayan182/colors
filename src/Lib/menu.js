@@ -15,6 +15,18 @@ const menus = [
         subMenu: []
     },
     {
+        name: "Memo",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/memo",
+        subMenu: []
+    },
+    {
+        name: "Movie",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/movie",
+        subMenu: []
+    },
+    {
         name: "Contact Us",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/contact",
