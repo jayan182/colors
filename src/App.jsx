@@ -17,10 +17,11 @@ function App() {
             <Route path="*" element={ <About/> } />
             <Route path="about" element={ <About/> } />
             <Route path="memo" element={ <Memo/> } />
-            <Route path="movie" element={ <Movie/> }>
-              <Route path="movie/:movieId" element={ <MovieDetail/ >} />
-            </Route>
+            <Route path="movie" element={ <Movie/> } />
+            <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
+
             <Route path=":productName/detail/" element={ <Detail/> } />
+
             <Route path="contacts" element={ <Contacts/> }>
                 <Route path="list" element={ <List/ >} />
                 <Route path="create" element={ <Create/ >} />

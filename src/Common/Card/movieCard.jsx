@@ -1,5 +1,5 @@
 
-function MovieCard({movie, key}){
+function MovieCard({movie, index, cardClick}){
     const styles = {
         container: {
             display: 'flex',
@@ -12,19 +12,20 @@ function MovieCard({movie, key}){
             alignItems: 'center',
             justifyContent: 'center',
             padding: 10,
+            cursor: 'pointer',
         }
     }
 
     return (
-       <div style={styles.container} key={key}>
-           <img 
-            src={`${movie.medium_cover_image}`} 
-            width={180}
-            height={280}
-           />
-           <p>
-               {movie.title}
-           </p>
+       <div style={styles.container} key={index} onClick={()=>{cardClick(movie.imdb_code)}}>
+            <img 
+                src={`${movie.medium_cover_image}`} 
+                width={180}
+                height={280}
+            />
+            <p>
+                {movie.title}
+            </p>
        </div>
     )
 }
