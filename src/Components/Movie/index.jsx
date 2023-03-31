@@ -1,19 +1,83 @@
 import Wrapper from '../../Common/Wrapper/index';
-import {useFetch} from "../../Hooks/useFetch";
 import MovieCard from '../../Common/Card/movieCard';
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
+import genres from '../../Lib/genres';
+import Pill from "../../Common/Pill";
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function Index(){
+    const [selectedGenre, setSelectedGenre] = useState('Horror');
+    const [data, setData] = useState([]);
+    let url = `https://yts.torrentbay.to/api/v2/list_movies.json?genre=${selectedGenre}`;
     const navigate = useNavigate();
-    const data = useFetch('https://yts.torrentbay.to/api/v2/list_movies.json');
     
+    const getMovieData = (url) => {
+        axios.get(url).then((res)=>{
+            setData(res.data);
+        });
+    }
+    useEffect(()=>{
+        getMovieData(url);
+    },[]);
+
     const cardClick = (imdb_code) => {
         navigate(`${imdb_code}`);
     };
 
+    const changeGenre = async (genre) => {
+        setData(undefined);
+        setSelectedGenre(genre);
+        let url = `https://yts.torrentbay.to/api/v2/list_movies.json?limit=10&genre=${genre}&page=2`;
+        getMovieData(url);
+    } 
+
+    const changePage = (page) => {
+        setData(undefined);
+        let url = `https://yts.torrentbay.to/api/v2/list_movies.json?limit=10&page=${page}`;
+        getMovieData(url);
+    }
+
     return (
         <div style={{alignItems:'center', justifyContent: 'space-around', display: 'flex', flexDirection: 'column'}}>
-            <h2>Movie</h2>
+            <h2>{`List of ${selectedGenre} movies`}</h2>
+
+            <div style={styles.container}>
+            {
+                genres.map((genre, key)=>{
+                   return (
+                    <Pill 
+                        onPress={changeGenre}
+                        genre={genre} 
+                        key={key} 
+                        style={{
+                            display: 'flex',
+                            borderRadius: 10,
+                            backgroundColor: `${genre.colorCode}`,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width :100,
+                            margin: 10,
+                            cursor: 'pointer',
+                        }}
+                    />
+                   )
+                })
+            }
+            </div >
+
+            <div style={styles.container}>
+               {
+                   [1,2,3,4,5,6,7,8,9,10].map((number,key)=>{
+                       return (
+                           <button 
+                            key={key}
+                            onClick={()=>{changePage(number)}}
+                           >{number}</button>
+                       )
+                   })
+               }
+            </div>
 
             {
                 data !== undefined ?
@@ -40,6 +104,17 @@ function Index(){
             }
         </div>
     )
+}
+
+const styles = {
+    container: {
+        display: 'flex',
+        flex:1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    }
 }
 
 export default Index;

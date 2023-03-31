@@ -5,10 +5,10 @@ import {useFetch} from '../../Hooks/useFetch';
 function MovieDetail(){
     const params = useParams();
     let imdb_id = params.movieId;
+
     let url = `https://yts.torrentbay.to/api/v2/movie_details.json?imdb_id=${imdb_id}`;
     let data = useFetch(url);
 
-    console.log("data",data);
     return (
         <div style={styles.container}>
         {

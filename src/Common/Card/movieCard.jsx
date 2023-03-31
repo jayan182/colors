@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 function MovieCard({movie, index, cardClick}){
     const styles = {
@@ -17,7 +18,12 @@ function MovieCard({movie, index, cardClick}){
     }
 
     return (
-       <div style={styles.container} key={index} onClick={()=>{cardClick(movie.imdb_code)}}>
+       <Link 
+            style={styles.container} 
+            key={index} 
+            //onClick={()=>{cardClick(movie.imdb_code)}}
+            to={`/movie/${movie.imdb_code}`}
+        >
             <img 
                 src={`${movie.medium_cover_image}`} 
                 width={180}
@@ -26,7 +32,7 @@ function MovieCard({movie, index, cardClick}){
             <p>
                 {movie.title}
             </p>
-       </div>
+       </Link>
     )
 }
 export default MovieCard;
