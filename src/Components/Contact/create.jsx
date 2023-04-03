@@ -11,7 +11,7 @@ function Create(){
     const [colors, setColors] = useState([]);
     const [selectedColor, setSelectedColor] = useState([]);
     let selectColorLength = Object.values(selectedColor).length;
-
+    const [error, setError] = useState({});
 
     useEffect(()=>{
         let tempColor = localStorage.getItem('colors');
@@ -20,10 +20,19 @@ function Create(){
         }
     },[]);
 
+    const onRegister= () =>{
+        if(selectedColor.length === 0){
+            setError({
+                "name": "Color name is Required.",
+                "code": "Color code is Required.",
+            })
+        }
+    }
+
     return (
         <Wrapper>
             <Col sm={12} md={4} lg={6}>
-                <Form onSubmit={()=>{}}>
+                <Form >
                     <div className="d-grid gap-3">
                         <FloatingLabel
                             controlId="floatingInput"
@@ -38,6 +47,12 @@ function Create(){
                                 defaultValue={selectColorLength > 0 ? selectedColor.color_name : ""}
                             />
                         </FloatingLabel>
+
+                        {
+                            Object.values(error).length > 0 &&
+                                error.hasOwnProperty("name") &&
+                                    <span>{error.name}</span>
+                        }
 
                         <Form.Check 
                             type="switch"

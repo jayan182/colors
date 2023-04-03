@@ -27,6 +27,12 @@ const menus = [
         subMenu: []
     },
     {
+        name: "Reducer",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/reducer",
+        subMenu: []
+    },
+    {
         name: "Contact Us",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/contact",

@@ -5,6 +5,7 @@ import genres from '../../Lib/genres';
 import Pill from "../../Common/Pill";
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Pagination from 'react-bootstrap/Pagination';
 
 function Index(){
     const [selectedGenre, setSelectedGenre] = useState('Horror');
@@ -58,6 +59,7 @@ function Index(){
                             justifyContent: 'center',
                             width :100,
                             margin: 10,
+                            height: 45,
                             cursor: 'pointer',
                         }}
                     />
@@ -65,19 +67,6 @@ function Index(){
                 })
             }
             </div >
-
-            <div style={styles.container}>
-               {
-                   [1,2,3,4,5,6,7,8,9,10].map((number,key)=>{
-                       return (
-                           <button 
-                            key={key}
-                            onClick={()=>{changePage(number)}}
-                           >{number}</button>
-                       )
-                   })
-               }
-            </div>
 
             {
                 data !== undefined ?
@@ -102,6 +91,37 @@ function Index(){
                 :
                     <p>Loading ...</p>
             }
+
+            <div style={styles.container}>
+               {/* {
+                   [1,2,3,4,5,6,7,8,9,10].map((number,key)=>{
+                       return (
+                           <button 
+                            key={key}
+                            onClick={()=>{changePage(number)}}
+                           >{number}</button>
+                       )
+                   })
+               } */}
+
+                <Pagination>
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    <Pagination.Item>{1}</Pagination.Item>
+                    <Pagination.Ellipsis />
+
+                    <Pagination.Item>{10}</Pagination.Item>
+                    <Pagination.Item>{11}</Pagination.Item>
+                    <Pagination.Item active>{12}</Pagination.Item>
+                    <Pagination.Item>{13}</Pagination.Item>
+                    <Pagination.Item disabled>{14}</Pagination.Item>
+
+                    <Pagination.Ellipsis />
+                    <Pagination.Item>{20}</Pagination.Item>
+                    <Pagination.Next />
+                    <Pagination.Last />
+                    </Pagination>`
+            </div>
         </div>
     )
 }

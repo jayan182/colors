@@ -8,6 +8,7 @@ import Detail from "./Components/Contact/detail";
 import Memo from "./Components/Memo";
 import Movie from "./Components/Movie/index";
 import MovieDetail from "./Components/Movie/detail";
+import Index from './Components/Reducer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="memo" element={ <Memo/> } />
             <Route path="movie" element={ <Movie/> } />
             <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
+            <Route path="reducer" element={ <Index/> } />
 
             <Route path=":productName/detail/" element={ <Detail/> } />
 
