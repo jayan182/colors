@@ -51,7 +51,7 @@ function Create(){
                         {
                             Object.values(error).length > 0 &&
                                 error.hasOwnProperty("name") &&
-                                    <span>{error.name}</span>
+                                    <span style={{color: "red"}}>{error.name}</span>
                         }
 
                         <Form.Check 
