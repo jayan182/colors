@@ -32,7 +32,7 @@ function Create(){
     return (
         <Wrapper>
             <Col sm={12} md={4} lg={6}>
-                <Form >
+                {/* <Form > */}
                     <div className="d-grid gap-3">
                         <FloatingLabel
                             controlId="floatingInput"
@@ -72,11 +72,11 @@ function Create(){
                             />
                         </FloatingLabel>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" onClick={()=>{onRegister()}}>
                             {selectColorLength > 0 ? "Update" : "Register"}
                         </Button>
                     </div>
-                </Form>
+                {/* </Form> */}
             </Col>
         </Wrapper>
     )
