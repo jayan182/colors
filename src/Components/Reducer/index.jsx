@@ -1,20 +1,32 @@
 import { useReducer } from 'react';
+//import {initialState, reducer} from './reducer';
+import Wrapper from '../../Common/Wrapper';
 
-const initialCounter = 0;
+const initialState = {
+    counter: 0
+};
 
-const reducer = (state, action) => {
+const reducer = (state, action) =>{
     switch(action.type){
-        case "INCREMENT": 
-            return state + 1;
+        case "INCREMENT":
+           return {
+               ...state, counter: state.counter + 1
+           }
         case "DECREMENT":
-            return state - 1;
+            return {
+                ...state, counter: state.counter - 1
+            }
+        case "RESET":
+            return {
+                ...state, counter: initialState.counter
+            }
         default:
-            console.log("state");
+           return state;
     }
 }
 
 function Index() {
-    const [counter, dispatch] = useReducer(reducer, initialCounter);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const decrement = () => {
         dispatch({type: 'DECREMENT'})
@@ -24,12 +36,17 @@ function Index() {
         dispatch({type: 'INCREMENT'})
     }
 
+    const reset = () => {
+        dispatch({type: 'RESET'})
+    }
+
     return (
-       <>
-       <button onClick={()=>{decrement()}}>-</button>
-       <h2>{counter}</h2>
-       <button onClick={()=>{increment()}}>+</button>
-       </>
+       <Wrapper>
+        <button onClick={()=>{decrement()}}>-</button>
+        <h2>{state.counter}</h2>
+        <button onClick={()=>{increment()}}>+</button>
+        <button onClick={()=>{reset()}}>RESET</button>
+       </Wrapper>
     )
 }
 
