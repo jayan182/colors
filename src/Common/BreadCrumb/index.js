@@ -1,9 +1,11 @@
 import {useLocation} from "react-router-dom";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import CardIndex from '../Card/index';
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
+import { Context } from '../../Components/Reducer/store'
 
 function Index() {
+    const [state] = useContext(Context);
     const [path, setPath] = useState([]);
     const location = useLocation();
 
@@ -24,6 +26,7 @@ function Index() {
                         })
                 }
             </Breadcrumb>
+            <span>{state.counter}</span>
         </CardIndex>
     )
 }

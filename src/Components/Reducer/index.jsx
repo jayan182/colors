@@ -1,32 +1,9 @@
-import { useReducer } from 'react';
-//import {initialState, reducer} from './reducer';
+import { useContext } from 'react';
 import Wrapper from '../../Common/Wrapper';
-
-const initialState = {
-    counter: 0
-};
-
-const reducer = (state, action) =>{
-    switch(action.type){
-        case "INCREMENT":
-           return {
-               ...state, counter: state.counter + 1
-           }
-        case "DECREMENT":
-            return {
-                ...state, counter: state.counter - 1
-            }
-        case "RESET":
-            return {
-                ...state, counter: initialState.counter
-            }
-        default:
-           return state;
-    }
-}
+import { Context } from './store';
 
 function Index() {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useContext(Context);
 
     const decrement = () => {
         dispatch({type: 'DECREMENT'})
