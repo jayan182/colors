@@ -33,6 +33,12 @@ const menus = [
         subMenu: []
     },
     {
+        name: "Fruits",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/fruits",
+        subMenu: []
+    },
+    {
         name: "Contact Us",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/contact",

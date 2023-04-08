@@ -10,6 +10,7 @@ import Movie from "./Components/Movie/index";
 import MovieDetail from "./Components/Movie/detail";
 import Index from './Components/Reducer';
 import Store from '../src/Components/Reducer/store';
+import Fruits from '../src/Components/Fruits';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="movie" element={ <Movie/> } />
               <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
               <Route path="reducer" element={ <Index/> } />
+              <Route path="fruits" element={ <Fruits/> } />
 
               <Route path=":productName/detail/" element={ <Detail/> } />
 
