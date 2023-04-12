@@ -39,6 +39,12 @@ const menus = [
         subMenu: []
     },
     {
+        name: "Class Component",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/class_component",
+        subMenu: []
+    },
+    {
         name: "Contact Us",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/contact",

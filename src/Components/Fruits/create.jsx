@@ -1,13 +1,20 @@
 
 function Create({registerFruits, error, handleChange}){
     return (
-        <form onSubmit={()=>{registerFruits()}}>
+        <>
             <label>Fruit Name</label>
             {
                 Object.values(error).length > 0 &&
                     <span>{error.name}</span>
             }
+            <input
+                name="image"
+                type="text"
+                placeholder="Fruit Image"
+                onChange={(e)=>{handleChange(e)}}
+            />
            <input
+                name="name"
                 type="text"
                 placeholder="Fruit Name"
                 onChange={(e)=>{handleChange(e)}}
@@ -15,10 +22,10 @@ function Create({registerFruits, error, handleChange}){
 
             <br />
 
-            <button>
+            <button onClick={(e)=>{registerFruits(e)}}>
                 Register
             </button>
-        </form>
+        </>
     )   
 }
 

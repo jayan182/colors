@@ -11,6 +11,7 @@ import MovieDetail from "./Components/Movie/detail";
 import Index from './Components/Reducer';
 import Store from '../src/Components/Reducer/store';
 import Fruits from '../src/Components/Fruits';
+import ClassComponent from "./Components/ClassComponent";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
               <Route path="reducer" element={ <Index/> } />
               <Route path="fruits" element={ <Fruits/> } />
+              <Route path="class_component" element={ <ClassComponent/> } />
 
               <Route path=":productName/detail/" element={ <Detail/> } />
 

@@ -1,0 +1,59 @@
+import React from 'react';
+
+
+class ClassComponent extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            course: "React Native",
+        }
+    }
+
+    render() {
+        return(
+            <div>
+                <CourseComponent course={this.state.course} />
+            </div>
+        )
+    }
+}
+
+class CourseComponent extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            course: 'Flutter'
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({course: 'React JS'});
+        },1000);
+    }
+
+    // getSnapshotBeforeUpdate(prevProps, prevState) {
+    //     document.getElementById('div1').innerHTML = "Before update, favorite course was " + prevState.course;
+    // }
+
+    componentDidUpdate() {
+        document.getElementById('div2').innerHTML = "The updated favorite course is " + this.state.course;
+    }
+
+    changeCourse = () => {
+       this.setState({course: "Next JS"});
+    }
+
+    render() {
+        return (
+            <>
+                <h1>My favorite course is {this.state.course} !</h1>
+                <button onClick={this.changeCourse}>Change Course</button>
+                <div id="div1"></div>
+                <div id="div2"></div>
+            </>
+        )
+    }
+}
+
+export default ClassComponent;

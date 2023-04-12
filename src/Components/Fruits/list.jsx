@@ -1,10 +1,32 @@
+import { memo } from "react";
 
-
-function List({fruits}){
-    console.log("fruits",fruits);
+function List({fruits, deleteFruit}){
     return (
-        <h1>List</h1>
+        <ul>
+            {
+                Object.values(fruits).length > 0 &&
+                    Object.values(fruits).map((fruit,key)=>{
+                        return (
+                            <li key={key}>
+                                <img 
+                                    src={`${fruit.image}`}
+                                    style={{width: 50, height: 50, borderRadius: 50}} 
+                                />
+                                {fruit.name}
+                                <button>
+                                    Edit
+                                </button>
+
+                                <button onClick={()=>{deleteFruit(fruit.name)}}>
+                                    Delete
+                                </button>
+                            </li>
+                        )
+                    })
+            }
+        </ul>
+
     )
 }
 
-export default List;
+export default memo(List);
