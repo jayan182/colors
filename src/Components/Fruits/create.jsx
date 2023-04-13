@@ -1,6 +1,6 @@
 
-function Create({registerFruits, error, handleChange}){
-    return (
+function Create({registerFruits, error, handleChange, update, fruits}){
+   return (
         <>
             <label>Fruit Name</label>
             {
@@ -11,19 +11,37 @@ function Create({registerFruits, error, handleChange}){
                 name="image"
                 type="text"
                 placeholder="Fruit Image"
+                value={
+                    Object.values(update).length > 0 ?
+                        update[0].image
+                    :
+                        fruits.image    
+                }
                 onChange={(e)=>{handleChange(e)}}
             />
-           <input
+
+            <input
                 name="name"
                 type="text"
                 placeholder="Fruit Name"
+                value={
+                    Object.values(update).length > 0 ?
+                        update[0].name
+                    :
+                        fruits.name  
+                }
                 onChange={(e)=>{handleChange(e)}}
             />
 
             <br />
 
             <button onClick={(e)=>{registerFruits(e)}}>
-                Register
+                {
+                    Object.values(update).length > 0 ?
+                        "Update"
+                    :
+                        "Register"
+                }
             </button>
         </>
     )   

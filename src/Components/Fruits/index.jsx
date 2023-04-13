@@ -1,11 +1,39 @@
 import List from './list';
 import Create from './create';
 import {useState, useRef, useEffect} from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
-function Fruits(){
+function MyVerticallyCenteredModal(props){
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+        <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+                Delete
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <h4>Do you really want to delete ?</h4>
+        </Modal.Body>
+        <Modal.Footer>
+            <Button onClick={props.onHide}>Yes</Button>
+            <Button onClick={props.onHide}>No</Button>
+        </Modal.Footer>
+        </Modal>
+    )
+}
+
+function Fruits({props}){
+    const [modalShow, setModalShow] = useState(false);
     const [fruitList, setFruitList] = useState([]);
     const [fruits, setFruits] = useState({});
     const [error, setError] = useState({});
+    const [fruitEdit, setFruitEdit] = useState([]);
 
     const styles = {
         container: {
@@ -38,7 +66,10 @@ function Fruits(){
         const name = e.target.name;
         const value = e.target.value;
 
-        setFruits(prev_fruit => ({...prev_fruit, [name]: value}));
+        setFruits(prev_fruit => ({
+            ...prev_fruit, 
+            [name]: value,
+        }));
     }
 
     const registerFruits = () => {
@@ -48,12 +79,18 @@ function Fruits(){
             })
         }
         else{
-            setError({});
-            setFruitList(i => [...i, fruits]);
+            if(Object.values(fruitEdit).length === 0){
+                setError({});
+                setFruitList(i => [...i, fruits]);
+            }
+            else{
+                
+            }
         }
     }
 
     const deleteFruits = (fruit) => {
+        //setModalShow(true);
         let index = fruitList.findIndex((tmp)=>{return tmp.name === fruit});
 
         if(index !== -1){
@@ -63,8 +100,21 @@ function Fruits(){
         }
     }
 
+    const editFruit = (fruit) => {
+        let temp_fruit = fruitList.filter((tmp)=>{return tmp.name === fruit});
+
+        setFruitEdit(temp_fruit);
+    }
+
     return (
         <div style={styles.container}>
+            {
+                modalShow &&
+                    <MyVerticallyCenteredModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
+            }
             <h1>Fruits</h1>
 
             <div style={styles.bodyContainer}>
@@ -73,6 +123,8 @@ function Fruits(){
                         registerFruits={registerFruits} 
                         handleChange={handleChange}
                         error={error}
+                        update={fruitEdit}
+                        fruits={fruits}
                     />
                 </div>
 
@@ -80,6 +132,7 @@ function Fruits(){
                     <List 
                         fruits={fruitList}
                         deleteFruit={deleteFruits}
+                        edit={editFruit}
                     />
                 </div>
             </div>
