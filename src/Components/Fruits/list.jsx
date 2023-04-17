@@ -1,7 +1,6 @@
 import { memo } from "react";
 
 function List({fruits, deleteFruit, edit}){
-    console.log("fruits",fruits);
     return (
         <ul>
             {
@@ -14,7 +13,7 @@ function List({fruits, deleteFruit, edit}){
                                     style={{width: 50, height: 50, borderRadius: 50}} 
                                 />
                                 {fruit.name}
-                                <button onClick={()=>{edit(fruit.name)}}>
+                                <button onClick={()=>{edit(fruit.name, key)}}>
                                     Edit
                                 </button>
 

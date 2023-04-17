@@ -34,6 +34,7 @@ function Fruits({props}){
     const [fruits, setFruits] = useState({});
     const [error, setError] = useState({});
     const [fruitEdit, setFruitEdit] = useState([]);
+    const [editedKey, setEditedKey] = useState('');
 
     const styles = {
         container: {
@@ -66,10 +67,19 @@ function Fruits({props}){
         const name = e.target.name;
         const value = e.target.value;
 
-        setFruits(prev_fruit => ({
-            ...prev_fruit, 
-            [name]: value,
-        }));
+        if(Object.values(fruitEdit).length > 0){
+            let temp = fruitEdit[0];
+            setFruitEdit([{
+                ...temp,
+                [name]: value
+            }]);
+        }
+        else{
+            setFruits(prev_fruit => ({
+                ...prev_fruit, 
+                [name]: value,
+            }));
+        }
     }
 
     const registerFruits = () => {
@@ -81,10 +91,25 @@ function Fruits({props}){
         else{
             if(Object.values(fruitEdit).length === 0){
                 setError({});
+                setFruits({});
                 setFruitList(i => [...i, fruits]);
             }
             else{
-                
+                setError({});
+                let temp = [];
+
+                fruitList.map((tmp,key)=>{
+                    if(key === editedKey){
+                        temp.push(fruitEdit[0]);
+                    }
+                    else{
+                        temp.push(tmp);
+                    }
+                })
+
+                setFruitList(temp);
+                setFruitEdit([]);
+                setEditedKey('');
             }
         }
     }
@@ -100,10 +125,11 @@ function Fruits({props}){
         }
     }
 
-    const editFruit = (fruit) => {
+    const editFruit = (fruit, key) => {
         let temp_fruit = fruitList.filter((tmp)=>{return tmp.name === fruit});
 
         setFruitEdit(temp_fruit);
+        setEditedKey(key);
     }
 
     return (
@@ -141,4 +167,3 @@ function Fruits({props}){
 }
 
 export default Fruits;
-
