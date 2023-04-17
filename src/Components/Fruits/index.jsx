@@ -1,8 +1,10 @@
 import List from './list';
 import Create from './create';
-import {useState, useRef, useEffect} from 'react';
+import {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer'
 
 function MyVerticallyCenteredModal(props){
     return (
@@ -28,13 +30,16 @@ function MyVerticallyCenteredModal(props){
     )
 }
 
-function Fruits({props}){
+function Fruits(){
+    const [toast, setToast] = useState(false);
     const [modalShow, setModalShow] = useState(false);
     const [fruitList, setFruitList] = useState([]);
     const [fruits, setFruits] = useState({});
     const [error, setError] = useState({});
     const [fruitEdit, setFruitEdit] = useState([]);
     const [editedKey, setEditedKey] = useState('');
+    const [message, setMessage] = useState('');
+    const [cartList, setCartList] = useState([]);
 
     const styles = {
         container: {
@@ -82,7 +87,7 @@ function Fruits({props}){
         }
     }
 
-    const registerFruits = () => {
+    const registerFruits = (e) => {
         if(fruits.length == 0){
             setError({
                 "name": "Fruits is Required"
@@ -91,8 +96,13 @@ function Fruits({props}){
         else{
             if(Object.values(fruitEdit).length === 0){
                 setError({});
-                setFruits({});
+                setFruits({
+                    name: "",
+                    image: ""
+                });
                 setFruitList(i => [...i, fruits]);
+                setToast(true);
+                setMessage('Added Successfully !');
             }
             else{
                 setError({});
@@ -110,6 +120,8 @@ function Fruits({props}){
                 setFruitList(temp);
                 setFruitEdit([]);
                 setEditedKey('');
+                setToast(true);
+                setMessage('Updated successfully')
             }
         }
     }
@@ -122,6 +134,8 @@ function Fruits({props}){
             let temp_fruits = [...fruitList];
             temp_fruits.splice(index, 1);
             setFruitList(temp_fruits);
+            setToast(true);
+            setMessage('Deleted Successfully !');
         }
     }
 
@@ -132,8 +146,44 @@ function Fruits({props}){
         setEditedKey(key);
     }
 
+    const addtoCart = (fruit) => {
+       let index = cartList.findIndex((tmp)=>{
+           return tmp.name === fruit.name
+       });
+
+       if(index === -1){
+        setCartList(i => [...i, fruit]);
+       }
+       else{
+            let temp_fruits = [...cartList];
+            temp_fruits.splice(index, 1);
+            setCartList(temp_fruits);
+       }
+}
+    
+    console.log("cartList",cartList);
     return (
         <div style={styles.container}>
+            {
+                toast &&
+                    <ToastContainer
+                        position="bottom-end"
+                    >
+                        <Toast 
+                            bg="success"
+                            onClose={() => setToast(false)} 
+                            show={toast} 
+                            delay={5000} 
+                            autohide
+                        >
+                            <Toast.Body>
+                                <span style={{color: 'white'}}>
+                                    {message}
+                                </span>
+                            </Toast.Body>
+                        </Toast>
+                    </ToastContainer>
+            }
             {
                 modalShow &&
                     <MyVerticallyCenteredModal
@@ -159,6 +209,7 @@ function Fruits({props}){
                         fruits={fruitList}
                         deleteFruit={deleteFruits}
                         edit={editFruit}
+                        cart={addtoCart}
                     />
                 </div>
             </div>

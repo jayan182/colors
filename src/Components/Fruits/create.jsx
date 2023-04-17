@@ -2,7 +2,6 @@
 function Create({registerFruits, error, handleChange, update, fruits}){
    return (
         <>
-            <label>Fruit Name</label>
             {
                 Object.values(error).length > 0 &&
                     <span>{error.name}</span>
