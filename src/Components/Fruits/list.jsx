@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 

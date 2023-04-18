@@ -1,10 +1,12 @@
 import List from './list';
 import Create from './create';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer'
+import Cart from './cart';
+import Sort from '../../Lib/sort';
 
 function MyVerticallyCenteredModal(props){
     return (
@@ -117,7 +119,7 @@ function Fruits(){
                     }
                 })
 
-                setFruitList(temp);
+                setFruitList();
                 setFruitEdit([]);
                 setEditedKey('');
                 setToast(true);
@@ -161,7 +163,6 @@ function Fruits(){
        }
 }
     
-    console.log("cartList",cartList);
     return (
         <div style={styles.container}>
             {
@@ -192,6 +193,10 @@ function Fruits(){
                     />
             }
             <h1>Fruits</h1>
+
+            <Cart 
+                cart={cartList}
+            />
 
             <div style={styles.bodyContainer}>
                 <div style={styles.leftContainer}>
