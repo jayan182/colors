@@ -5,6 +5,8 @@ import { Context } from './store';
 function Index() {
     const [state, dispatch] = useContext(Context);
 
+    let {counter} = state;
+
     const decrement = () => {
         dispatch({type: 'DECREMENT'})
     }
@@ -20,7 +22,7 @@ function Index() {
     return (
        <Wrapper>
         <button onClick={()=>{decrement()}}>-</button>
-        <h2>{state.counter}</h2>
+        <h2>{counter}</h2>
         <button onClick={()=>{increment()}}>+</button>
         <button onClick={()=>{reset()}}>RESET</button>
        </Wrapper>

@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import UserContext from './Providers/userProvider';
 import products from './Lib/products';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

@@ -1,10 +1,11 @@
 function FruitCard({id, name, image}) {
     const styles = {
         container:{
-            dispplay: 'flex',
+            display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            marginRight: 10
         },
         imageContainer :{
             flex: 3,

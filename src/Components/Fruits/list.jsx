@@ -1,8 +1,16 @@
-import { memo, useEffect } from "react";
+import { memo, useContext } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import {FruitContext} from '../../Context/fruitContext';
+import {action} from './actionTypes';
+import {Images} from '../../Assets'
 
-function List({fruits, deleteFruit, edit, cart}){
+function List(){
+    let [state,dispatch] = useContext(FruitContext);
+    let {
+        fruitList: fruits
+    } = state;
+
     return (
         <Table striped bordered hover>
             <thead>
@@ -17,11 +25,16 @@ function List({fruits, deleteFruit, edit, cart}){
                     Object.values(fruits).length > 0 ?
                         Object.values(fruits).map((fruit,key)=>{
                             return (
-                                <tr>
+                                <tr key ={key}>
                                     <td>
                                         <input 
                                             type="checkbox"
-                                            onClick={()=>{cart(fruit)}}
+                                            onClick={()=>{
+                                                dispatch({
+                                                   type: action.ADD_REMOVE_FROM_CART,
+                                                   value: fruit
+                                                })
+                                            }}
                                         />
                                     </td>
                                     <td>
@@ -32,20 +45,29 @@ function List({fruits, deleteFruit, edit, cart}){
                                         {fruit.name}
                                     </td>
                                     <td>
-                                        <Button 
-                                            variant="success"
-                                            onClick={()=>{edit(fruit.name, key)}}
-                                        >
-                                            Edit
-                                        </Button>
+                                        <img 
+                                            src={Images.edit} 
+                                            style={{width: 20, height: 20, cursor: 'pointer'}}
+                                            onClick={()=>{
+                                                dispatch({
+                                                    type: action.EDIT_REQUEST,
+                                                    value: fruit.name,
+                                                    key: key,
+                                                })
+                                            }}
+                                        />
                                     </td>
                                     <td>
-                                        <Button
-                                            variant="danger"
-                                            onClick={()=>{deleteFruit(fruit.name)}}
-                                        >
-                                            Delete
-                                        </Button>
+                                        <img 
+                                            src={Images.delete} 
+                                            style={{width: 20, height: 20, cursor: 'pointer'}}
+                                            onClick={()=>{
+                                                dispatch({
+                                                    type: action.DELETE_REQUEST,
+                                                    value: fruit.name
+                                                })
+                                            }}
+                                        />
                                     </td>
                                 </tr>
                             )

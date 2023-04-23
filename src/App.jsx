@@ -12,30 +12,33 @@ import Index from './Components/Reducer';
 import Store from '../src/Components/Reducer/store';
 import Fruits from '../src/Components/Fruits';
 import ClassComponent from "./Components/ClassComponent";
+import FruitStore from './Context/fruitProvider';
 
 function App() {
   return (
     <div className="App">
-        <Store>
-          <Routes>
-              <Route path="/" element={ <Home/> } />
-              <Route path="*" element={ <About/> } />
-              <Route path="about" element={ <About/> } />
-              <Route path="memo" element={ <Memo/> } />
-              <Route path="movie" element={ <Movie/> } />
-              <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
-              <Route path="reducer" element={ <Index/> } />
-              <Route path="fruits" element={ <Fruits/> } />
-              <Route path="class_component" element={ <ClassComponent/> } />
+        <FruitStore>
+          <Store>
+            <Routes>
+                <Route path="/" element={ <Home/> } />
+                <Route path="*" element={ <About/> } />
+                <Route path="about" element={ <About/> } />
+                <Route path="memo" element={ <Memo/> } />
+                <Route path="movie" element={ <Movie/> } />
+                <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
+                <Route path="reducer" element={ <Index/> } />
+                <Route path="fruits" element={ <Fruits/> } />
+                <Route path="class_component" element={ <ClassComponent/> } />
 
-              <Route path=":productName/detail/" element={ <Detail/> } />
+                <Route path=":productName/detail/" element={ <Detail/> } />
 
-              <Route path="contacts" element={ <Contacts/> }>
-                  <Route path="list" element={ <List/ >} />
-                  <Route path="create" element={ <Create/ >} />
-              </Route>
-          </Routes>
-        </Store>
+                <Route path="contacts" element={ <Contacts/> }>
+                    <Route path="list" element={ <List/ >} />
+                    <Route path="create" element={ <Create/ >} />
+                </Route>
+            </Routes>
+          </Store>
+        </FruitStore>
     </div>
   )
 }

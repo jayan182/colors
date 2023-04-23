@@ -1,48 +1,27 @@
 import List from './list';
 import Create from './create';
-import {useEffect, useState} from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import {useContext, useState} from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Cart from './cart';
-import Sort from '../../Lib/sort';
+import {FruitContext} from '../../Context/fruitContext';
+import {action} from './actionTypes';
 
-function MyVerticallyCenteredModal(props){
-    return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-        <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-                Delete
-            </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <h4>Do you really want to delete ?</h4>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button onClick={props.onHide}>Yes</Button>
-            <Button onClick={props.onHide}>No</Button>
-        </Modal.Footer>
-        </Modal>
-    )
-}
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Wrapper from "../../Common/Wrapper";
 
 function Fruits(){
-    const [toast, setToast] = useState(false);
-    const [modalShow, setModalShow] = useState(false);
-    const [fruitList, setFruitList] = useState([]);
-    const [fruits, setFruits] = useState({});
-    const [error, setError] = useState({});
-    const [fruitEdit, setFruitEdit] = useState([]);
-    const [editedKey, setEditedKey] = useState('');
-    const [message, setMessage] = useState('');
-    const [cartList, setCartList] = useState([]);
+    const [state, dispatch] = useContext(FruitContext);
 
+    let { 
+        toast,
+        message,
+    } = state;
+
+    const [toastData,] = useState(toast);
+    
     const styles = {
         container: {
             height: '100%', 
@@ -70,155 +49,55 @@ function Fruits(){
         }
     }
 
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        if(Object.values(fruitEdit).length > 0){
-            let temp = fruitEdit[0];
-            setFruitEdit([{
-                ...temp,
-                [name]: value
-            }]);
-        }
-        else{
-            setFruits(prev_fruit => ({
-                ...prev_fruit, 
-                [name]: value,
-            }));
-        }
+    const displayToast = () => {
+        return (
+            <ToastContainer
+                position="bottom-end"
+            >
+                <Toast 
+                    bg="success"
+                    onClose={() => {
+                        dispatch({
+                           type: action.SET_UNSET_TOAST
+                        });
+                    }} 
+                    show={toastData} 
+                    delay={5000} 
+                    autohide
+                >
+                    <Toast.Body>
+                        <span style={{color: 'white'}}>
+                            {message}
+                        </span>
+                    </Toast.Body>
+                </Toast>
+            </ToastContainer>
+        )
     }
 
-    const registerFruits = (e) => {
-        if(fruits.length == 0){
-            setError({
-                "name": "Fruits is Required"
-            })
-        }
-        else{
-            if(Object.values(fruitEdit).length === 0){
-                setError({});
-                setFruits({
-                    name: "",
-                    image: ""
-                });
-                setFruitList(i => [...i, fruits]);
-                setToast(true);
-                setMessage('Added Successfully !');
-            }
-            else{
-                setError({});
-                let temp = [];
-
-                fruitList.map((tmp,key)=>{
-                    if(key === editedKey){
-                        temp.push(fruitEdit[0]);
-                    }
-                    else{
-                        temp.push(tmp);
-                    }
-                })
-
-                setFruitList();
-                setFruitEdit([]);
-                setEditedKey('');
-                setToast(true);
-                setMessage('Updated successfully')
-            }
-        }
-    }
-
-    const deleteFruits = (fruit) => {
-        //setModalShow(true);
-        let index = fruitList.findIndex((tmp)=>{return tmp.name === fruit});
-
-        if(index !== -1){
-            let temp_fruits = [...fruitList];
-            temp_fruits.splice(index, 1);
-            setFruitList(temp_fruits);
-            setToast(true);
-            setMessage('Deleted Successfully !');
-        }
-    }
-
-    const editFruit = (fruit, key) => {
-        let temp_fruit = fruitList.filter((tmp)=>{return tmp.name === fruit});
-
-        setFruitEdit(temp_fruit);
-        setEditedKey(key);
-    }
-
-    const addtoCart = (fruit) => {
-       let index = cartList.findIndex((tmp)=>{
-           return tmp.name === fruit.name
-       });
-
-       if(index === -1){
-        setCartList(i => [...i, fruit]);
-       }
-       else{
-            let temp_fruits = [...cartList];
-            temp_fruits.splice(index, 1);
-            setCartList(temp_fruits);
-       }
-}
-    
     return (
-        <div style={styles.container}>
-            {
-                toast &&
-                    <ToastContainer
-                        position="bottom-end"
-                    >
-                        <Toast 
-                            bg="success"
-                            onClose={() => setToast(false)} 
-                            show={toast} 
-                            delay={5000} 
-                            autohide
-                        >
-                            <Toast.Body>
-                                <span style={{color: 'white'}}>
-                                    {message}
-                                </span>
-                            </Toast.Body>
-                        </Toast>
-                    </ToastContainer>
-            }
-            {
-                modalShow &&
-                    <MyVerticallyCenteredModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
-            }
-            <h1>Fruits</h1>
+        <Wrapper>
+            <div style={styles.container}>
+                {
+                    toastData &&
+                        displayToast()
+                }
 
-            <Cart 
-                cart={cartList}
-            />
+                <Cart />
 
-            <div style={styles.bodyContainer}>
-                <div style={styles.leftContainer}>
-                    <Create 
-                        registerFruits={registerFruits} 
-                        handleChange={handleChange}
-                        error={error}
-                        update={fruitEdit}
-                        fruits={fruits}
-                    />
-                </div>
+                <Container>
+                    <Row>
+                        <Col xs={12} md={6} lg={6}>
+                            <Create />
+                        </Col>
 
-                <div style={styles.rightContainer}>
-                    <List 
-                        fruits={fruitList}
-                        deleteFruit={deleteFruits}
-                        edit={editFruit}
-                        cart={addtoCart}
-                    />
-                </div>
+                        <Col xs={12} md={6} ld={6}>
+                            <List />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
-        </div>
+        </Wrapper>
     )
 }
 
