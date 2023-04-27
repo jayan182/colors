@@ -13,6 +13,7 @@ import Store from '../src/Components/Reducer/store';
 import Fruits from '../src/Components/Fruits';
 import ClassComponent from "./Components/ClassComponent";
 import FruitStore from './Context/fruitProvider';
+import Weather from '../src/Components/Weather';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="reducer" element={ <Index/> } />
                 <Route path="fruits" element={ <Fruits/> } />
                 <Route path="class_component" element={ <ClassComponent/> } />
+                <Route path="weather" element={ <Weather/> } />
 
                 <Route path=":productName/detail/" element={ <Detail/> } />
 

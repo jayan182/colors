@@ -45,6 +45,12 @@ const menus = [
         subMenu: []
     },
     {
+        name: "Weather",
+        icon: <FontAwesomeIcon icon={faCheckSquare} />,
+        path: "/weather",
+        subMenu: []
+    },
+    {
         name: "Contact Us",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/contact",

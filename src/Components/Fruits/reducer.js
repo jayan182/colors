@@ -105,7 +105,7 @@ const reducer = (state, action) => {
                     ...state,
                     fruitEdit
                 }
-            }
+            } 
             else{
                 let temp = {[name]: value};
                 let fruits = {"fruits" : {...state.fruits, ...temp}};
