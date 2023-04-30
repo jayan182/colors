@@ -26,7 +26,7 @@ function Index() {
                         })
                 }
             </Breadcrumb>
-            <span>{state.counter}</span>
+            {/* <span>{state.counter}</span> */}
         </CardIndex>
     )
 }

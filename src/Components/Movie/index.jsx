@@ -12,6 +12,7 @@ function Index(){
     const [data, setData] = useState([]);
     let url = `https://yts.torrentbay.to/api/v2/list_movies.json?genre=${selectedGenre}`;
     const navigate = useNavigate();
+    let offset = 5;
     
     const getMovieData = (url) => {
         axios.get(url).then((res)=>{
@@ -92,36 +93,64 @@ function Index(){
                     <p>Loading ...</p>
             }
 
-            <div style={styles.container}>
-               {/* {
-                   [1,2,3,4,5,6,7,8,9,10].map((number,key)=>{
-                       return (
-                           <button 
-                            key={key}
-                            onClick={()=>{changePage(number)}}
-                           >{number}</button>
-                       )
-                   })
-               } */}
+            {
+                Object.values(data).length > 0 &&
+                    <div style={styles.container}>
+                        {/* <Pagination>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            <Pagination.Item>{1}</Pagination.Item>
+                            <Pagination.Ellipsis />
 
-                <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis />
+                            <Pagination.Item>{10}</Pagination.Item>
+                            <Pagination.Item>{11}</Pagination.Item>
+                            <Pagination.Item active>{12}</Pagination.Item>
+                            <Pagination.Item>{13}</Pagination.Item>
+                            <Pagination.Item disabled>{14}</Pagination.Item>
 
-                    <Pagination.Item>{10}</Pagination.Item>
-                    <Pagination.Item>{11}</Pagination.Item>
-                    <Pagination.Item active>{12}</Pagination.Item>
-                    <Pagination.Item>{13}</Pagination.Item>
-                    <Pagination.Item disabled>{14}</Pagination.Item>
+                            <Pagination.Ellipsis />
+                            <Pagination.Item>{20}</Pagination.Item>
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination> */}
 
-                    <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                    </Pagination>`
-            </div>
+                        <Pagination>
+                            {
+                                [0,1,2,3,4].map((tmp)=>{
+                                    return (
+                                        <>
+                                            {
+                                                tmp === 0 && <Pagination.First />
+                                            }
+                                            {
+                                                tmp === 0 &&
+                                                    (data.data.page_number) > 5 &&
+                                                        <Pagination.Ellipsis />
+
+                                            }
+                                            <Pagination.Item>{data.data.page_number + tmp}</Pagination.Item>
+                                            {
+                                                tmp === 4 &&
+                                                    (data.data.page_number) < 5 &&
+                                                        <Pagination.Ellipsis />
+
+                                            }
+                                            {
+                                                tmp === 4 &&
+                                                    (data.data.page_number) < 5 &&
+                                                        <Pagination.Item>{data.data.movie_count}</Pagination.Item>
+
+                                            }
+                                            {
+                                                tmp === 4 &&  <Pagination.Last />
+                                            }
+                                        </>
+                                    )
+                                })
+                            }
+                        </Pagination>
+                    </div>
+            }
         </div>
     )
 }

@@ -6,3 +6,10 @@ export const getForecast = async(params) => {
     });
     return data;
 }
+
+export const getCurrentForecast = async(params) => {
+    let data = WEATHER.get('current.json', {params}).then((res)=>{
+        return res.data;
+    });
+    return data;
+}
