@@ -14,14 +14,33 @@ import Fruits from '../src/Components/Fruits';
 import ClassComponent from "./Components/ClassComponent";
 import FruitStore from './Context/fruitProvider';
 import Weather from '../src/Components/Weather';
+import Login from '../src/Components/Login/login';
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState("");
+
+  useEffect(()=>{
+    let user = localStorage.getItem('user');
+    setUser(user);
+
+    if(user === null){
+      navigate("/");
+    }
+    else{
+      navigate("/home");
+    }
+  },[]);
+
   return (
     <div className="App">
         <FruitStore>
           <Store>
             <Routes>
-                <Route path="/" element={ <Home/> } />
+                <Route path="/" element={ <Login/> } />
+                <Route path="/home" element={ <Home/> } />
                 <Route path="*" element={ <About/> } />
                 <Route path="about" element={ <About/> } />
                 <Route path="memo" element={ <Memo/> } />
