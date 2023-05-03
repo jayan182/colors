@@ -23,23 +23,28 @@ function App() {
   const [user, setUser] = useState("");
 
   useEffect(()=>{
+    console.log("sdfkjhsdfkjgdskjf")
     let user = localStorage.getItem('user');
     setUser(user);
 
     if(user === null){
       navigate("/");
     }
-    else{
-      navigate("/home");
-    }
   },[]);
+
+
 
   return (
     <div className="App">
         <FruitStore>
           <Store>
-            <Routes>
-                <Route path="/" element={ <Login/> } />
+            {
+              user === null ?
+                <Routes>
+                  <Route path="/" element={ <Login/> } />
+              </Routes>
+            :
+              <Routes>
                 <Route path="/home" element={ <Home/> } />
                 <Route path="*" element={ <About/> } />
                 <Route path="about" element={ <About/> } />
@@ -57,7 +62,8 @@ function App() {
                     <Route path="list" element={ <List/ >} />
                     <Route path="create" element={ <Create/ >} />
                 </Route>
-            </Routes>
+              </Routes>
+            }
           </Store>
         </FruitStore>
     </div>

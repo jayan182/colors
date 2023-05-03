@@ -12,7 +12,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Wrapper from "../../Common/Wrapper";
 
-function Fruits(){
+function Fruits(props){
+    console.log("props",props);
     const [state, dispatch] = useContext(FruitContext);
 
     let { 

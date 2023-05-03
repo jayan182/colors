@@ -3,9 +3,19 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import menus from '../../Lib/menu';
+import menus from '../../Lib/menu'; 
+import {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState("");
+
+  useEffect(()=>{
+    let data = JSON.parse(localStorage.getItem("user"));
+    setUser(data.email);
+  },[]);
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -50,6 +60,13 @@ function NavBar() {
             }
           </Nav>
         </Navbar.Collapse>
+        <Navbar.Brand href="#home">{user}</Navbar.Brand>
+        <Navbar.Brand 
+          onClick={()=>{
+            localStorage.removeItem('user');
+            navigate("/");
+          }}
+        >Logout</Navbar.Brand>
       </Container>
     </Navbar>
     </>
