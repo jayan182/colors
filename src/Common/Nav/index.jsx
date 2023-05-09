@@ -13,7 +13,12 @@ function NavBar() {
 
   useEffect(()=>{
     let data = JSON.parse(localStorage.getItem("user"));
-    setUser(data.email);
+    if(data !== null){
+      setUser(data.email);
+    }
+    else{
+      navigate("/");
+    }
   },[]);
 
   return (

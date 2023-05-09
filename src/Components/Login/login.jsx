@@ -1,14 +1,25 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import credientials from '../../Lib/userCredentials';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login (){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState({});
+
+    // useEffect(()=>{
+    //     let data = JSON.parse(localStorage.getItem("user"));
+
+    //     if(data !== null){
+    //       navigate("/home");
+    //     }
+    //     else{
+    //       navigate("/");
+    //     }
+    // },[]);
 
     const Login = () =>{
         setError({
@@ -62,18 +73,17 @@ function Login (){
                  })
             }
             else{
+                setError({});
                 localStorage.setItem("user", JSON.stringify(
                     {
                         email: email,
                         password: password
                     }
                 ));
-                navigate("/home");
+                navigate('home');
             }
         }
     }
-
-    console.log("eroror",Object.values(error).length);
 
     return (
         <Form>
@@ -121,6 +131,10 @@ function Login (){
             >
                 Submit
             </Button>
+
+            <Link to={"/register"}>
+                Register
+            </Link>
         </Form>
       );
 }
