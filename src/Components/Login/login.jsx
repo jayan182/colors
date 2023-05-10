@@ -8,18 +8,19 @@ function Login (){
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
     const [error, setError] = useState({});
 
-    // useEffect(()=>{
-    //     let data = JSON.parse(localStorage.getItem("user"));
+    useEffect(()=>{
+        let data = JSON.parse(localStorage.getItem("user"));
 
-    //     if(data !== null){
-    //       navigate("/home");
-    //     }
-    //     else{
-    //       navigate("/");
-    //     }
-    // },[]);
+        if(data !== null){
+          navigate("/home");
+        }
+        else{
+          navigate("/");
+        }
+    },[]);
 
     const Login = () =>{
         setError({
@@ -45,43 +46,65 @@ function Login (){
              })
         }
         else{
-            if(
-                credientials.email !== email &&
-                credientials.password !== password 
-            ){
-                setError({
-                    "email": "Email is invalid", 
-                    "password": "Password is invalid", 
-                 })
-            }
-            else if(
-                credientials.email === email &&
-                credientials.password !== password 
-            ){
-                setError({
-                    "email": "", 
-                    "password": "Password is invalid", 
-                 })
-            }
-            else if(
-                credientials.email !== email &&
-                credientials.password === password 
-            ){
-                setError({
-                    "email": "Email is invalid", 
-                    "password": "", 
-                 })
-            }
-            else{
+            // if(
+            //     credientials.email !== email &&
+            //     credientials.password !== password 
+            // ){
+            //     setError({
+            //         "email": "Email is invalid", 
+            //         "password": "Password is invalid", 
+            //      })
+            // }
+            // else if(
+            //     credientials.email === email &&
+            //     credientials.password !== password 
+            // ){
+            //     setError({
+            //         "email": "", 
+            //         "password": "Password is invalid", 
+            //      })
+            // }
+            // else if(
+            //     credientials.email !== email &&
+            //     credientials.password === password 
+            // ){
+            //     setError({
+            //         "email": "Email is invalid", 
+            //         "password": "", 
+            //      })
+            // }
+            // else{
                 setError({});
-                localStorage.setItem("user", JSON.stringify(
-                    {
-                        email: email,
-                        password: password
+
+                let user =  localStorage.getItem("user_list");
+                
+                if(user !== null){
+                    user = JSON.parse(user);
+
+                    let search = user.filter((tmp)=>{
+                        return tmp.email === email &&  tmp.password === password && tmp.role === role
+                    });
+
+                    if(search.length > 0){
+                        localStorage.setItem("user", JSON.stringify(
+                            {
+                                email: email,
+                                password: password,
+                                role: role,
+                                image: search[0].image,
+                            }
+                        ));
+                        navigate('home');
                     }
-                ));
-                navigate('home');
-            }
+                    else{
+                        alert("Invalid crendirentials")
+                    }
+
+                }
+                else{
+                    alert("user not registered");
+                }
+           // }
         }
     }
 
@@ -119,6 +142,14 @@ function Login (){
                         {error.password}
                     </span>
             }
+
+            <Form.Select aria-label="Select Role" onClick={(e)=>{
+                setRole(e.target.value)
+            }}>
+                <option>Choose</option>
+                <option value="Admin">Admin</option>
+                <option value="Client">Client</option>
+            </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />

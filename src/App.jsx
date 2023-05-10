@@ -23,13 +23,13 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
-  // useEffect(()=>{
-  //   setUser(user);
+  useEffect(()=>{
+    setUser(user);
 
-  //   // if(user === null || user === ""){
-  //   //   navigate("/");
-  //   // }
-  // },[user]);
+    if(user === null || user === ""){
+      navigate("/");
+    }
+  },[user]);
 
 
   return (
