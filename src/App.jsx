@@ -18,6 +18,7 @@ import Login from '../src/Components/Login/login';
 import Register from '../src/Components/Login/register';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import PermittedRoute from "./Config/permittedRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -39,20 +40,97 @@ function App() {
             <Routes>
               <Route path="/" element={ <Login/> } />
               <Route path="/register" element={ <Register/> } />
-              <Route path="/home" element={ <Home/> } />
-              <Route path="*" element={ <About/> } />
-              <Route path="about" element={ <About/> } />
-              <Route path="memo" element={ <Memo/> } />
-              <Route path="movie" element={ <Movie/> } />
-              <Route path="/movie/:movieId" element={ <MovieDetail/ >} />
-              <Route path="reducer" element={ <Index/> } />
-              <Route path="fruits" element={ <Fruits/> } />
-              <Route path="class_component" element={ <ClassComponent/> } />
-              <Route path="weather" element={ <Weather/> } />
+              <Route 
+                path="/home" 
+                element={ 
+                  <PermittedRoute>
+                    <Home/> 
+                  </PermittedRoute>
+                }
+               />
+              <Route path="*" element={ 
+                <PermittedRoute>
+                  <About/> 
+                </PermittedRoute>  
+              } />
+              <Route 
+                path="about" 
+                element={ 
+                  <PermittedRoute>
+                    <About/> 
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="memo" 
+                element={ 
+                  <PermittedRoute>
+                    <Memo/> 
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="movie" 
+                element={ 
+                  <PermittedRoute>
+                    <Movie/> 
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="/movie/:movieId" 
+                element={ 
+                  <PermittedRoute>
+                    <MovieDetail/ >
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="reducer" 
+                element={ 
+                  <PermittedRoute>
+                    <Index/> 
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="fruits" 
+                element={ 
+                  <PermittedRoute>
+                    <Fruits/>
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="class_component" 
+                element={ 
+                  <PermittedRoute>
+                    <ClassComponent/> 
+                  </PermittedRoute>
+                } 
+              />
+              <Route 
+                path="weather" 
+                element={ 
+                  <PermittedRoute>
+                    <Weather/> 
+                  </PermittedRoute>
+                } 
+              />
 
-              <Route path=":productName/detail/" element={ <Detail/> } />
+              <Route path=":productName/detail/" 
+                element={ 
+                  <PermittedRoute>
+                    <Detail/> 
+                  </PermittedRoute>
+                } 
+              />
 
-              <Route path="contacts" element={ <Contacts/> }>
+              <Route path="contacts" element={ 
+                <PermittedRoute>
+                    <Contacts/> 
+                  </PermittedRoute>
+              }>
                   <Route path="list" element={ <List/ >} />
                   <Route path="create" element={ <Create/ >} />
               </Route>

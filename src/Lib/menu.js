@@ -5,50 +5,58 @@ const menus = [
     {
         name: "Home",
         icon: <FontAwesomeIcon icon={faCoffee} />,
-        path: "/",
-        subMenu: []
+        path: "/home",
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "About",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/about",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Memo",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/memo",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Movie",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/movie",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Reducer",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/reducer",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Fruits",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/fruits",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Class Component",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/class_component",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin"]
     },
     {
         name: "Weather",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/weather",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Contact Us",
@@ -59,15 +67,16 @@ const menus = [
                 name: "List",
                 icon: <FontAwesomeIcon icon={faCheckSquare} />,
                 path: "/contacts/list",
-                subMenu: [] 
+                subMenu: [],
             },
             {
                 name: "Create",
                 icon: <FontAwesomeIcon icon={faCheckSquare} />,
                 path: "/contacts/create",
-                subMenu: [] 
+                subMenu: [],
             }
-        ]
+        ],
+        permissions: ["Admin"]
     }
 ];
 

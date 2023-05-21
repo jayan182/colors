@@ -6,12 +6,16 @@ import ForeCastText from './forecastText';
 import {useState, useEffect} from 'react';
 import {getForecast, getCurrentForecast} from './service';
 
+interface ParamsInerFace {
+    city: string
+}
+
 function Index(){
-    const [loading, setLoading] = useState(false);
-    const [city, setCity] = useState('Kathmandu');
+    const [loading, setLoading] = useState<boolean>(false);
+    const [city, setCity] = useState<string | null | undefined>('Kathmandu');
     const [weatherData, setWeatherData] = useState([]);
 
-    async function data(){
+    async function data(params : ParamsInerFace): ParamsInerFace{
         const params = {
             key: "318712e780144abcac530843233001",
             q: city,

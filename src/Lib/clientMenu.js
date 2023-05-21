@@ -5,38 +5,44 @@ const clientMenues = [
     {
         name: "Home",
         icon: <FontAwesomeIcon icon={faCoffee} />,
-        path: "/",
-        subMenu: []
+        path: "/home",
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "About",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/about",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Memo",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/memo",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Movie",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/movie",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Fruits",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/fruits",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
     {
         name: "Weather",
         icon: <FontAwesomeIcon icon={faCheckSquare} />,
         path: "/weather",
-        subMenu: []
+        subMenu: [],
+        permissions: ["Admin", "Client"]
     },
 ];
 

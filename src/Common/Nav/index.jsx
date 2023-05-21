@@ -93,9 +93,20 @@ function NavBar() {
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <div style={{height: 100, width: 100, borderRadius: '50%', backgroundColor: 'green'}}>
-            {/* {user.email.charAt(0)} */}
-          </div>
+          {
+            user.image === "" ?
+              <div style={{display: 'flex',height: 100, width: 100, borderRadius: '50%', backgroundColor: 'cyan',alignItems: 'center', justifyContent: 'center'}}>
+                <span style={{fontSize: 52}}>
+                  { user.email !== null && user.email.charAt(0).toUpperCase()}
+                </span>
+              </div>
+            :
+              <img 
+                src={user.image !== null && user.image} 
+                style={{height: 100, width: 100, borderRadius: '50%'}}
+              />
+          }
+          
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
@@ -107,7 +118,7 @@ function NavBar() {
                   style={{
                       display: 'flex',
                       borderRadius: 10,
-                      backgroundColor: "green",
+                      backgroundColor: "cyan",
                       alignItems: 'center',
                       justifyContent: 'center',
                       width :100,

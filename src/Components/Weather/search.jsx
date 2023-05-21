@@ -1,4 +1,14 @@
-function Search({cityChange, searchCity}) {
+interface ParamsInterface {
+    cityChange() : {},
+    searchCity() : {},
+    weather: weatherInterface
+}
+
+interface weatherInterface{
+    current : sdfdksjf
+}
+
+function Search(props: ParamsInterface) {
     return (
         <div>
             <input 

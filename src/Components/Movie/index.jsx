@@ -50,7 +50,7 @@ function Index(){
                    return (
                     <Pill 
                         onPress={changeGenre}
-                        genre={genre} 
+                        genre={genre.name} 
                         key={key} 
                         style={{
                             display: 'flex',
